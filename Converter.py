@@ -1,8 +1,10 @@
 import requests
+import pandas as pd 
+
 
 class Converter:
     def __init__(self, url):
-        self.data = requests.get(url).json()
+        self.data = pd.DataFrame(requests.get(url).json())
         self.currencies = self.data['rates']
 
     def Convert(self, fromC, toC, amount):
@@ -11,4 +13,7 @@ class Converter:
             intialamount = intialamount/self.currencies[fromC]
         amount = round(intialamount*self.currencies[toC], 2)
         return amount
+
+
+
 
